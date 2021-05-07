@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import NavBar from "./components/NavBar";
+import {BrowserRouter, Route, Switch} from "react-router-dom";
+import Login from "./components/Login";
+import Profile from "./components/Profile";
+import ProfileList from "./components/ProfileList";
+import Home from "./components/Home";
+import {useAuth,AuthContext} from "./hooks/useAuth";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+const App = ()=>{
+    const auth = useAuth();
+    return (
+      <AuthContext.Provider value = {auth}>
+          <BrowserRouter>
+                <div className="App">
+                    <NavBar/>
+                </div>
+
+              <Switch>
+                  <Route exact path ="/login" component = {Login}></Route>
+                  <Route exact path ="/cupido/profile" component = {Profile}/>
+                  <Route exact path ="/cupido/profilelist" component = {ProfileList}/>
+                  <Route path ="/" component = {Home} />
+              </Switch>
+          </BrowserRouter>
+      </AuthContext.Provider>
   );
 }
 

@@ -1,0 +1,64 @@
+body {
+    overflow-x: hidden;
+    font-family: "Roboto Slab","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size:15px;
+
+}
+.navbar-expand-lg {
+    font-size: 17px;
+}
+.container-login {
+    margin-top: 6%;
+
+}
+.container-login .alert{
+    text-align: center;
+}
+
+.container-login .jumbotron{
+    padding: 30px 15px ;
+    color: inherit;
+    background: #8fa9c6;
+    width: 480px;
+    margin:0 auto;
+}
+
+
+.btn-login{
+    color: #fff;
+    background-color: green;
+    border-color: #2e6da4;
+    width: 100%;
+    margin-top: 20px;
+}
+
+.panel-login {
+    padding: 30px 30px;
+    margin-top: 30px;
+    color: inherit;
+}
+.panel-login label{
+    font-style: normal;
+    color :#ffffff;
+}
+.panel-login h5{
+    color :#ffffff;
+}
+
+.forgot-password {
+    text-align: center;
+    margin-top: 15px;
+    font-size: small;
+
+}
+.forgot-password a{
+    color:#fff;
+}
+
+
+.navbar-expand-lg .nav-link   {
+    color: #2b2b2b;
+}
+.navbar-expand-lg .nav-link:active{
+    color: #000;
+}
