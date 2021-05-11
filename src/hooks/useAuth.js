@@ -36,7 +36,7 @@ export const useAuth =() =>{
 
     const storeCredentials = (token)=>{
 
-        const credentials_ = {username:"fulano@gmail.com",displayName:"fulano",token:token};
+        const credentials_ = {username:"ciclaninho40@gmail.com",displayName:"Ciclano",token:token};
         sessionStorage.setItem(CREDENTIALS_NAME,JSON.stringify(credentials_));
         setCredentials(credentials_);
     }
