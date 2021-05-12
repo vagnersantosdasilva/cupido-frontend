@@ -6,6 +6,7 @@ import ProfileList from "./components/ProfileList";
 import Home from "./components/Home";
 import {useAuth,AuthContext} from "./hooks/useAuth";
 import MyProfile from "./components/MyProfile";
+import {ProfileForm} from "./components/ProfileForm";
 
 const App = ()=>{
     const auth = useAuth();
@@ -21,6 +22,7 @@ const App = ()=>{
                   <Route exact path ="/cupido/profile/:id" component = {Profile}/>
                   <Route exact path ="/cupido/profilelist" component = {ProfileList}/>
                   <Route exact path ="/cupido/profile" component = {MyProfile}/>
+                  <Route exact path ="/cupido/profileForm/:id" component = {ProfileForm}/>
                   <Route path ="/" component = {Home} />
               </Switch>
           </BrowserRouter>

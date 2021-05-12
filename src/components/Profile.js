@@ -10,10 +10,12 @@ const Profile = (props) =>{
     const profiles = useProfileList();
     const auth = useContext(AuthContext);
 
-    const [profile,setProfile] = useState({ id:"0",name: "",age:"",email:"",sex :"",video :"",text :""});
-
+    const [profile,setProfile] = useState({ id:"0",name: "",age:"",email:"",sex :"",video :"",text :"",birth:""});
+    const [id,setId]=useState("0");
+    const [redirect,setRedirect] = useState(false);
     useEffect(()=>{
         const id = props.match.params.id;
+        setId(id);
         profiles.loadProfile(id);
     },[auth.credentials]);
 
@@ -21,7 +23,13 @@ const Profile = (props) =>{
         setProfile(profiles.profile);
     },[profiles.profile]);
 
-    if (auth.credentials===null) return <Redirect to = { "/login"}/>
+    const onClickHandler = (event)=>{
+        console.log(id);
+        setRedirect(true);
+
+    }
+    if (redirect) {return <Redirect to ={ `/cupido/profileForm/${id}`} />}
+    if (!auth.isAuthenticated()) return <Redirect to = { "/login"}/>
     if (profile.id!=="0"){
         console.log(profile.email);
         if (auth.credentials.username!==profile.email){
@@ -56,67 +64,48 @@ const Profile = (props) =>{
                 <div className="container">
                     <h3>{profile.name}</h3>
 
-                    <form>
-                        <div className="form-group">
 
-                            <label htmlFor="video">Vídeo Descritivo</label>
-                            <input type="text" className="form-control" name="video" placeholder="Link do seu vídeo descritivo criado no youtube" />
-                        </div>
+                    <div className ="profile-header"><br/>
+                        <h6>Dados pessoais :</h6>
+                        <hr/>
+                    </div>
+                    <div className = "profile-block">
 
-                        <div className="form-group">
-                            <label htmlFor="age">Idade</label>
-                            <input type="text" className="form-control" name="age" placeholder="Qual sua idade"/>
-                        </div>
-                        <div className="form-group">
+                        <ul>
+                            <li> <strong>Nome:</strong> {profile.name}</li>
+                            <li> <strong>Idade:</strong> {profile.age}</li>
+                            <li> <strong>Sexo:</strong> {profile.sex}</li>
+                            <li> <strong>Nome de usuário:</strong> {profile.email}</li>
 
-                            <input type="hidden" name="transp"/>
-                            <label htmlFor="transp">Como você se identifica ?</label><br/>
+                        </ul>
+                    </div>
 
-                            <input type="radio" id="male" name="gender" value="m-cis" />
-                            <label htmlFor="male">Homem Cis</label><br/>
+                    <div className ="profile-header"><br/>
+                        <h6>Auto descrição :</h6>
+                        <hr/>
+                    </div>
+                    <div className = "profile-block">
 
-                            <input type="radio" id="male" name="gender" value="m-trans"/>
-                            <label htmlFor="male">Homem trans</label><br/>
-
-                            <input type="radio" id="female" name="gender" value="w-cis"/>
-                            <label htmlFor="female">Mulher cis</label><br/>
-
-                            <input type="radio" id="female" name="gender" value="w-trans"/>
-                            <label htmlFor="female">Mulher trans</label><br/>
-
-                            <input type="radio" id="other" name="gender" value="other"/>
-                            <label htmlFor="other">Outro</label>
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="sex_interest">Você se interessa por :</label>
-                            <input type="text" className="form-control" name="sex_interest" placeholder=""/>
-                        </div>
-                        <div className="form-group">
+                        <ul>
+                            <li> <strong>Link de vídeo : </strong> {profile.video}</li>
+                            <li> <strong>Quem você é :</strong> {profile.text}</li>
+                        </ul>
+                    </div>
 
 
-                        </div>
-
-                        <div className="form-group">
-                            <label htmlFor="perfil">Descreva quem é você</label>
-                            <textarea  className="form-control" name="message" rows="5" cols="5" maxLength="500" placeholder="Diga suas preferências , filmes , hobes , músicas , etc ..."/>
-                            <br/>
-                        </div>
-
-
-
-                        <button type="submit" className="btn btn-info" >Enviar</button>
-
-                    </form>
-
+                    <br/>
+                    <input type="button" className="btn btn-info" value="Editar" onClick = {onClickHandler}/>
                 </div>
             );
         }
     }
-    return (
-        <div>
-             <Alert message = "Ocorreu um erro inesperado!"/>
-        </div>);
+    if (profiles.error!==null)
+        return (
+                <div>
+                     <Alert message = "Ocorreu um erro inesperado!"/>
+                </div>
+        );
+    return ( <div></div>);
 
 }
 export default Profile;

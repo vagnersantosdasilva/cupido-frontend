@@ -12,7 +12,7 @@ const ProfileList = () =>{
         profiles.listProfile();//console.log(profiles.listProfile());
     },[auth.credentials]);
 
-    if (auth.credentials===null) return <Redirect to = { "/login"}/>
+    if (!auth.isAuthenticated()) return <Redirect to = { "/login"}/>
     return (
             <section id="videos">
                 <div className="container">

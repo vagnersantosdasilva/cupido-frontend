@@ -6,7 +6,7 @@ export  const useProfileList = ()=>{
     const [list , setList] = useState([]);
     const [error,setError] = useState(null);
     const [processing,setProcessing] = useState (false);
-    const [profile , setProfile] = useState({ id:"0",name: "",age:"",email:"",sex :"",video :"",text :""});
+    const [profile , setProfile] = useState({ id:"0",name: "",age:"",email:"",sex :"",video :"",text :"",birth:""});
     const [loaded,setLoaded] = useState (false);
 
     const clearProfile = ()=>{

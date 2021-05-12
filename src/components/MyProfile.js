@@ -19,15 +19,17 @@ const MyProfile = ()=>{
     },[auth.credentials]);
 
     useEffect(()=>{
-        setProfile(profiles.profile);;
+        setProfile(profiles.profile);
     },[profiles.profile]);
 
     if (auth.credentials===null) return <Redirect to = { "/login"}/>
     if (profile!==null && profile.id!=="0" ) return <Redirect to = { `profile/${profile.id}`}/>
 
-    return (
+    if (profiles.error!==null)
+        return (
         <Alert message ="Ocorreu um erro inesperado! "/>
     );
+    return (<div></div>);
 }
 
 export default MyProfile;
