@@ -55,6 +55,8 @@ const Login  = () =>{
 
                             <button type="submit" className="btn btn-login" disabled={auth.processing}>Login
                             </button>
+                            <button type="submit" className="btn btn-singleup" disabled={auth.processing}>Cadastrar
+                            </button>
                             <div className="forgot-password"><a  href="#">Esqueceu a senha?</a></div>
 
                         </form>

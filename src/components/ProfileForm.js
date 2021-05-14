@@ -25,7 +25,6 @@ export const ProfileForm = (props)=>{
         }
     },[profiles.profile]);
 
-
     const onSubmitHandler = (event)=>{
         event.preventDefault();
         profiles.save(profile);
@@ -44,7 +43,6 @@ export const ProfileForm = (props)=>{
         console.log(profile);
         setProfile ({...profile,[field]:value});
     }
-
 
     if (!auth.isAuthenticated()){
         return <Redirect to ="/login"/>
@@ -72,8 +70,6 @@ export const ProfileForm = (props)=>{
                                value={profile.name}  onChange = {onInputChangeHandler}
                         />
                     </div>
-
-
 
                     <div className="form-group">
                         <label htmlFor="birth"><strong>Data de Nascimento</strong></label>
@@ -111,8 +107,6 @@ export const ProfileForm = (props)=>{
                         <label htmlFor="other">Outros</label>
                     </div>
 
-
-
                     <div className="form-group">
                         <label htmlFor="perfil"><strong>Descreva quem é você</strong></label>
                         <textarea  className="form-control" name="text" rows="5" cols="5" maxLength="500" placeholder="Diga suas preferências , filmes , hobes , músicas , etc ..."
@@ -139,13 +133,10 @@ const  convertDate = (birth) => {
 
     console.log(birth);
     if (birth!=="" && birth!==null && typeof (birth) !== 'undefined'){
-        let day = birth.split("/")[0];
-        let month = birth.split("/")[1];
-        let year = birth.split("/")[2];
-
-        return year+"-"+month+"-"+day;
+        let b = birth.split('T')[0];
+        return b;
     }
-    console.log("Depois :"+birth);
+
     return new Date(birth);
 }
 

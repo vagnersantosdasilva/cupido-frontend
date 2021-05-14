@@ -32,9 +32,17 @@ body {
     margin-top: 20px;
 }
 
+.btn-singleup{
+    color: #fff;
+    background-color: #2e6da4;
+    border-color: #2e6da4;
+    width: 100%;
+    margin-top: 20px;
+}
+
 .panel-login {
     padding: 30px 30px;
-    margin-top: 30px;
+    margin-top: 20px;
     color: inherit;
 }
 .panel-login label{
@@ -55,7 +63,6 @@ body {
     color:#fff;
 }
 
-
 .navbar-expand-lg .nav-link   {
     color: #2b2b2b;
 }
@@ -75,6 +82,5 @@ section#videos{
     background-color:#FFF;/*#FFFAFA;*/
     margin:30px;
     padding:10px;
-
 
 }

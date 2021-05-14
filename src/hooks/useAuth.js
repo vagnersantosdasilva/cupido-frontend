@@ -2,10 +2,9 @@
 import {AUTH_ENDPOINT, CREDENTIALS_NAME} from '../constants.js';
 
 import { createContext,useEffect,useState } from "react";
-
+import axios from "axios";
 export const AuthContext = createContext();
 
-//const cors = require("cors");
 
 export const useAuth =() =>{
     const [credentials,setCredentials] = useState({username:null,displayName:null,token:null});
@@ -23,9 +22,11 @@ export const useAuth =() =>{
 
        try{
            setProcessing(true);
-            //const response = await axios.post(`${AUTH_ENDPOINT}`,loginInfo,headers);
-            //const jwtToken = response.headers['authorization'].replace("Bearer ","");
-            storeCredentials("dksakdj1923923asdkasdjkasdlaskd");
+            const response = await axios.post(`${AUTH_ENDPOINT}`,loginInfo,headers);
+            //console.log(response);
+            console.log(response.data);
+            const jwtToken = response.data.token;
+            storeCredentials(jwtToken,username);
             setProcessing(false);
        }catch(error){
            console.log(error);
@@ -34,9 +35,10 @@ export const useAuth =() =>{
        }
     }
 
-    const storeCredentials = (token)=>{
-
-        const credentials_ = {username:"ciclaninho40@gmail.com",displayName:"Ciclano",token:token};
+    const storeCredentials = (token,username)=>{
+        const tokenData = JSON.parse(atob(token.split(".")[1]));
+        const credentials_ = {username:username,displayName:tokenData.displayName,token:token};
+        console.log(credentials_);
         sessionStorage.setItem(CREDENTIALS_NAME,JSON.stringify(credentials_));
         setCredentials(credentials_);
     }

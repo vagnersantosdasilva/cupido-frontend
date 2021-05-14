@@ -8,22 +8,23 @@ import Alert from "./Alert";
 const MyProfile = ()=>{
     const profiles = useProfileList();
     const auth = useContext(AuthContext);
-    const [profile,setProfile] = useState(null);
+    const [profile,setProfile] = useState({ id:0,name: "",email:"",sex :"",video :"",text :"",birth:""});
 
     useEffect(()=>{
         if (auth.credentials!==null){
             const username = auth.credentials.username;
-            console.log(username);
+            console.log("MyProfile-useeffect :"+username);
             profiles.loadProfileByUsername(username);
         }
     },[auth.credentials]);
 
     useEffect(()=>{
         setProfile(profiles.profile);
+        console.log("MyProfile-UseEffect:"+profile);
     },[profiles.profile]);
 
     if (auth.credentials===null) return <Redirect to = { "/login"}/>
-    if (profile!==null && profile.id!=="0" ) return <Redirect to = { `profile/${profile.id}`}/>
+    if (profile!=null && profile.id!=0 ) return <Redirect to = { `profile/${profile.id}`}/>
 
     if (profiles.error!==null)
         return (

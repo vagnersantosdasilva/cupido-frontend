@@ -3,20 +3,21 @@ import {useProfileList} from "../hooks/useProfileList";
 import {AuthContext} from "../hooks/useAuth";
 import Alert from "./Alert";
 import {Redirect} from "react-router-dom";
+import Moment from 'react-moment';
 
 const Profile = (props) =>{
-
 
     const profiles = useProfileList();
     const auth = useContext(AuthContext);
 
-    const [profile,setProfile] = useState({ id:"0",name: "",age:"",email:"",sex :"",video :"",text :"",birth:""});
-    const [id,setId]=useState("0");
+    const [profile,setProfile] = useState({ id:0,name: "",email:"",sex :"",video :"",text :"",birth:""});
+    const [id,setId]=useState(0);
     const [redirect,setRedirect] = useState(false);
     useEffect(()=>{
         const id = props.match.params.id;
-        setId(id);
-        profiles.loadProfile(id);
+        console.log("id" + id);
+        setId(~~id);
+        profiles.loadProfile(~~id);
     },[auth.credentials]);
 
     useEffect(()=>{
@@ -28,17 +29,21 @@ const Profile = (props) =>{
         setRedirect(true);
 
     }
+
+    const handleSubmit = (event)=>{
+        event.preventDefault();
+
+    }
+
     if (redirect) {return <Redirect to ={ `/cupido/profileForm/${id}`} />}
     if (!auth.isAuthenticated()) return <Redirect to = { "/login"}/>
-    if (profile.id!=="0"){
+    if (profile.id!==0){
         console.log(profile.email);
         if (auth.credentials.username!==profile.email){
             return (
                 <div>
                     <div className="container">
-
                         <h3>{profile.name}</h3>
-
                         <p>{profile.text}</p>
 
                         <hr></hr>
@@ -73,7 +78,7 @@ const Profile = (props) =>{
 
                         <ul>
                             <li> <strong>Nome:</strong> {profile.name}</li>
-                            <li> <strong>Idade:</strong> {profile.age}</li>
+                            <li> <strong>Nascimento:</strong> <Moment format="DD/MM/YYYY">{profile.birth}</Moment></li>
                             <li> <strong>Sexo:</strong> {profile.sex}</li>
                             <li> <strong>Nome de usuário:</strong> {profile.email}</li>
 
